@@ -1,12 +1,17 @@
 import { BrowserRouter } from 'react-router-dom'
-import { AppRouter } from '../router/AppRouter'
+import {Provider} from 'react-redux'
+import { store } from './store/store'
+
+import { AppRouter } from './router/AppRouter'
 
 function CalendarApp() {
 
   return (
-    <BrowserRouter>
-      <AppRouter/>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppRouter/>
+      </BrowserRouter>
+    </Provider>
   )
 }
 

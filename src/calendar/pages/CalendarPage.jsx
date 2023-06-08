@@ -8,23 +8,16 @@ import { calendarMessages } from '../../helpers/calendarMessages';
 import { CalendarEvent } from '../components/CalendarEvent';
 import { useState } from 'react';
 import { CalendarModal } from '../components/CalendarModal';
-
-const events  = [{
-    title:'compleaños de luis',
-    notes:'hay que comparar pastel',
-    start:new Date(),
-    end: addHours(new Date(),2),
-    bgColor:'#fafafa',
-    user:{
-        id:'123',
-        name:'Fernando'
-    }
-}];
+import { useUiStore } from '../../hooks/useUiStore';
+import { onOpenDateModal } from '../../store/ui/uiSlice';
+import { useCelendarStore } from '../../hooks/useCelendarStore';
 
 
 
 export const CalendarPage = () => {
 
+    const {events}= useCelendarStore();
+    const {openDateModal} = useUiStore();
     const [lastView, setlastView] = useState(localStorage.getItem('lastView')||'week')
 
     const eventStyleGetter =(event, start, end, isSelected)=>{
@@ -40,7 +33,7 @@ export const CalendarPage = () => {
     }
 
     const onDoubleClick = (event) =>{
-        console.log({onDoubleClick:event})
+        openDateModal()
     }
 
     const onSelect = (event) =>{
